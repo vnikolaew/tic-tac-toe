@@ -4,13 +4,13 @@ import { Player } from "../Game";
 export const useNextPlayer = (
    startPlayer: Player = "X"
 ): {
-   isNext: Player;
-   setIsNext: React.Dispatch<React.SetStateAction<Player>>;
+   xIsNext: boolean;
+   setIsNext: React.Dispatch<React.SetStateAction<boolean>>;
    switchTurns: () => void;
 } => {
-   const [isNext, setIsNext] = useState<Player>(startPlayer);
+   const [xIsNext, setIsNext] = useState<boolean>(true);
 
-   const switchPlayerTurn = () => setIsNext(isNext === "X" ? "O" : "X");
+   const switchPlayerTurn = () => setIsNext(!xIsNext);
 
-   return { isNext, setIsNext, switchTurns: switchPlayerTurn };
+   return { xIsNext, setIsNext, switchTurns: switchPlayerTurn };
 };

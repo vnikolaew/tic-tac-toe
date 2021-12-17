@@ -1,10 +1,10 @@
 import React from "react";
 import { FC } from "react";
-import { TSquare } from "../../Game";
+import { Player } from "../../Game";
 import "./History.css";
 
 export interface BoardHistory {
-   squares: TSquare[];
+   squares: (Player | null)[];
 }
 
 interface GameHistoryProps {

@@ -1,29 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { Board } from "./components/Board/Board";
-import { winningCombos } from "./utils/winningCombos";
-import { useNextPlayer } from "./utils/useNextPlayer";
 import { GameHistory } from "./components/GameHistory/GameHistory";
-import { BoardHistory } from "./components/GameHistory/GameHistory";
-import "./styles/Game.css";
+import { EmojiDropdown } from "./components/Dropdown/EmojiDropdown";
+
+import { useNextPlayer } from "./utils/useNextPlayer";
+import { useSelectEmojis } from "./utils/useSelectEmojis";
 import { useWinner } from "./utils/useWinner";
+import { Emoji } from "./utils/Emojis";
+import "./styles/Game.css";
+import { useHistory } from "./utils/useHistory";
+import { ResetGameButton } from "./components/GameHistory/ResetGameButton";
 
 export type Player = "X" | "O";
-export type TSquare = Player | null;
+export type TSquare = Player | Emoji | null;
 
 export const Game: React.FC = () => {
-   const { isNext, setIsNext, switchTurns } = useNextPlayer("X");
-   const { winner, setWinner, checkWinner } = useWinner<TSquare>();
-
-   const [history, setHistory] = useState<BoardHistory[]>(() => [
-      {
-         squares: Array.from({ length: 9 }, (_) => null),
-      },
-   ]);
+   const { xIsNext, setIsNext, switchTurns } = useNextPlayer();
+   const { winner, setWinner, checkWinner } = useWinner<Player | null>();
+   const { history, pushMove, setHistory } = useHistory();
 
    const squares = history[history.length - 1].squares;
 
+   const { emojis, setPlayerOneEmoji, setPlayerTwoEmoji } = useSelectEmojis();
+
    const goBackTo = (turn: number) => {
-      setIsNext(turn % 2 === 0 ? "X" : "O");
+      setIsNext(turn % 2 === 0);
       setHistory(history.slice(0, turn + 1));
       setWinner(null);
    };
@@ -32,39 +34,34 @@ export const Game: React.FC = () => {
       if (squares[squareIdx] || winner) return;
 
       const updatedBoard = squares.map((sq, id) => {
-         return squareIdx === id ? isNext : sq;
+         return squareIdx === id ? (xIsNext ? "X" : "O") : sq;
       });
 
-      setHistory([
-         ...history,
-         {
-            squares: updatedBoard,
-         },
-      ]);
-      checkWinner(squares, squareIdx, isNext);
+      pushMove(updatedBoard);
+
+      const nextPlayer = xIsNext ? "X" : "O";
+      checkWinner(squares, squareIdx, nextPlayer);
       switchTurns();
    };
 
    return (
       <>
+         <EmojiDropdown
+            emojis={emojis}
+            setPlayerOneEmoji={setPlayerOneEmoji}
+            setPlayerTwoEmoji={setPlayerTwoEmoji}
+         />
          <div className="Game">
             {" "}
             <h1>
-               {winner ? `Winner: ${winner}` : `Current Player:  ${isNext}`}
+               {winner
+                  ? `Winner: ${winner} !`
+                  : `Current Player:  ${xIsNext ? emojis[0] : emojis[1]}`}
             </h1>
-            <Board squares={squares} fillSquare={fillSquare} />
-            <button
-               style={{
-                  cursor: history.length > 1 ? "pointer" : "",
-               }}
-               className="reset"
-               disabled={history.length === 1}
-               onClick={() => {
-                  goBackTo(0);
-               }}
-            >
-               Reset!
-            </button>
+            <Board squares={squares} emojis={emojis} fillSquare={fillSquare} />
+            <ResetGameButton history={history} jumpTo={goBackTo}>
+               {winner ? "Play again!" : "Reset"}
+            </ResetGameButton>
          </div>
          <GameHistory history={history} onClick={goBackTo} />
       </>
