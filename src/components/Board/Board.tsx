@@ -11,12 +11,12 @@ interface BoardProps {
 export const Board: React.FC<BoardProps> = ({ squares, fillSquare }) => {
    return (
       <div className="board">
-         {squares.map((s, i) => (
+         {squares.map((value, i) => (
             <Square
-               size={150}
+               size={130}
                key={i}
-               value={s}
-               onClick={(e) => fillSquare(i)}
+               value={value}
+               onClick={(_) => fillSquare(i)}
             />
          ))}
       </div>

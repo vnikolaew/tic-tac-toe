@@ -9,7 +9,7 @@ interface SquareProps {
 }
 
 export const Square: React.FC<SquareProps> = ({
-   size = 60,
+   size = 150,
    value,
    onClick,
 }) => {
@@ -36,7 +36,7 @@ export const Square: React.FC<SquareProps> = ({
             });
          }}
          onMouseLeave={() => {
-            setSquareStyle({});
+            setSquareStyle(null);
          }}
       >
          {value}

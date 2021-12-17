@@ -1,7 +1,6 @@
 .Game {
    --bg-color: rgb(9, 20, 41);
    --primary-color: white;
-   font-size: 3rem;
    min-height: 100vh;
    display: flex;
    flex-direction: column;
@@ -12,23 +11,28 @@
    color: var(--primary-color);
 }
 
+.Game h1 {
+   font-size: 2.5rem;
+   margin-bottom: 0.5rem;
+}
+
 .reset {
    background-color: var(--primary-color);
    color: var(--bg-color);
    font-size: 2rem;
    font-weight: 500;
-   padding-block: 0.3rem;
-   padding-inline: 0.6rem;
+   padding-block: 0.5rem;
+   padding-inline: 1.2rem;
    border: none;
    outline: none;
    cursor: pointer;
-   border-radius: 0.3rem;
+   border-radius: 0.7rem;
    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
    transition: all 0.2s ease-in;
 }
 
 .reset:hover {
-   background-color: rgb(143, 143, 143);
+   background-color: rgb(196, 196, 196);
    color: var(--bg-color);
    border-color: var(--primary-color);
 }
