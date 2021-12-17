@@ -15,7 +15,7 @@ export const useHistory = ({
       },
    ]);
 
-   const pushMove = (updatedBoard: (Player | null)[]) =>
+   const pushMoveToHistory = (updatedBoard: (Player | null)[]) =>
       setHistory((oldHistory) => {
          return [
             ...oldHistory,
@@ -25,5 +25,5 @@ export const useHistory = ({
          ];
       });
 
-   return { history, pushMove, setHistory };
+   return { history, pushMoveToHistory, setHistory };
 };

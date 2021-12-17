@@ -18,7 +18,7 @@ export type TSquare = Player | Emoji | null;
 export const Game: React.FC = () => {
    const { xIsNext, setIsNext, switchTurns } = useNextPlayer();
    const { winner, setWinner, checkWinner } = useWinner<Player | null>();
-   const { history, pushMove, setHistory } = useHistory();
+   const { history, pushMoveToHistory, setHistory } = useHistory();
 
    const squares = history[history.length - 1].squares;
 
@@ -37,7 +37,7 @@ export const Game: React.FC = () => {
          return squareIdx === id ? (xIsNext ? "X" : "O") : sq;
       });
 
-      pushMove(updatedBoard);
+      pushMoveToHistory(updatedBoard);
 
       const nextPlayer = xIsNext ? "X" : "O";
       checkWinner(squares, squareIdx, nextPlayer);
