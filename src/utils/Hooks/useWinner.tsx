@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { winningCombos } from "./winningCombos";
+import { winningCombos } from "../winningCombos";
 
 export function useWinner<T>() {
    const [winner, setWinner] = useState<T | null>(null);

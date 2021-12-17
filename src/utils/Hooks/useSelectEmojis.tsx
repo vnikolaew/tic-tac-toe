@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TSquare } from "../Game";
+import { TSquare } from "../../Game";
 
 interface useSelectEmojiProps {
    initialEmojis?: [TSquare, TSquare];

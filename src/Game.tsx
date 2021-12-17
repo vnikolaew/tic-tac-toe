@@ -4,12 +4,12 @@ import { Board } from "./components/Board/Board";
 import { GameHistory } from "./components/GameHistory/GameHistory";
 import { EmojiDropdown } from "./components/Dropdown/EmojiDropdown";
 
-import { useNextPlayer } from "./utils/useNextPlayer";
-import { useSelectEmojis } from "./utils/useSelectEmojis";
-import { useWinner } from "./utils/useWinner";
+import { useNextPlayer } from "./utils/Hooks/useNextPlayer";
+import { useSelectEmojis } from "./utils/Hooks/useSelectEmojis";
+import { useWinner } from "./utils/Hooks/useWinner";
 import { Emoji } from "./utils/Emojis";
 import "./styles/Game.css";
-import { useHistory } from "./utils/useHistory";
+import { useHistory } from "./utils/Hooks/useHistory";
 import { ResetGameButton } from "./components/GameHistory/ResetGameButton";
 
 export type Player = "X" | "O";
