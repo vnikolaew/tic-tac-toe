@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## This is a simple React-Typescript tic-tac-toe game
+## A simple React-Typescript Tic-Tac-Toe game
 
 Enjoy!!
 
