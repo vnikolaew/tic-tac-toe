@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Player } from "../../Game";
+import { Player } from "../../utils/Types&Enums";
 
 export const useNextPlayer = (
    startPlayer: Player = "X"

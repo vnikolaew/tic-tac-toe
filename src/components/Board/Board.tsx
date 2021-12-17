@@ -1,5 +1,5 @@
 import React from "react";
-import { Player, TSquare } from "../../Game";
+import { Player, TSquare } from "../../utils/Types&Enums";
 import { Square } from "../Square/Square";
 import "./Board.css";
 

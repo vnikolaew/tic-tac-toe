@@ -1,5 +1,5 @@
 import React from "react";
-import { TSquare } from "../../Game";
+import { TSquare } from "../../utils/Types&Enums";
 import { SelectMenu } from "./SelectMenu";
 import "./SelectMenu.css";
 
@@ -17,6 +17,7 @@ export const EmojiSelectionContainer: React.FC<ESelectionContainerProps> = ({
    const [playerTwoDisabled, playerOneDisabled] = emojis;
    return (
       <div className="select">
+         <h1>Select your emojis: </h1>
          <SelectMenu
             player={1}
             disabled={playerOneDisabled}

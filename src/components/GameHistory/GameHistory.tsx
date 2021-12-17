@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Player } from "../../Game";
+import { Player } from "../../utils/Types&Enums";
 import "./History.css";
 
 export interface BoardHistory {
@@ -16,22 +16,30 @@ export const GameHistory: FC<GameHistoryProps> = ({ history, onClick }) => {
    return (
       <div className="history">
          {isAtBeginning ? (
-            <h2>Click for some fun! </h2>
+            <h2>Click for some fun! 😮</h2>
          ) : (
             <>
-               <button onClick={() => onClick(0)}>
+               <h1>
                   {" "}
-                  Go back to the beginning!
-               </button>
-               {history.slice(1, -1).map(({ squares }, i) => (
-                  <div key={i} className="turn">
-                     <h2>Player: {i % 2 === 1 ? "X" : "O"}</h2>
-                     <div>State: {squares.join(", ")}</div>
-                     <button onClick={() => onClick(i + 1)}>
-                        Go back to turn #{i + 1}
-                     </button>
-                  </div>
-               ))}
+                  Try time <br /> travelling! 🔙
+               </h1>
+               <select
+                  name="time-travel"
+                  id="time-travel"
+                  value={`Go back to: `}
+                  onChange={(e) => {
+                     onClick(+e.target.value);
+                  }}
+               >
+                  <option value="Go back to: " disabled={true}>
+                     Go back to:{" "}
+                  </option>
+                  {history.slice(0, -1).map(({ squares }, i) => (
+                     <option value={i} key={i} className="option">
+                        {`Turn #${i + 1}`}
+                     </option>
+                  ))}
+               </select>
             </>
          )}
       </div>

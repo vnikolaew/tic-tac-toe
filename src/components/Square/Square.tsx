@@ -1,5 +1,5 @@
 import React, { CSSProperties, useState } from "react";
-import { TSquare } from "../../Game";
+import { TSquare } from "../../utils/Types&Enums";
 import "./Square.css";
 
 interface SquareProps {

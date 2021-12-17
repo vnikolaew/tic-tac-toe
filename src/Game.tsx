@@ -7,13 +7,10 @@ import { EmojiSelectionContainer } from "./components/Dropdowns/EmojiDropdown";
 import { useNextPlayer } from "./utils/Hooks/useNextPlayer";
 import { useSelectEmojis } from "./utils/Hooks/useSelectEmojis";
 import { useWinner } from "./utils/Hooks/useWinner";
-import { Emoji } from "./utils/Emojis";
-import "./styles/Game.css";
+import { Player } from "./utils/Types&Enums";
 import { useHistory } from "./utils/Hooks/useHistory";
 import { ResetGameButton } from "./components/GameHistory/ResetGameButton";
-
-export type Player = "X" | "O";
-export type TSquare = Player | Emoji | null;
+import "./styles/Game.css";
 
 export const Game: React.FC = () => {
    const { xIsNext, setIsNext, switchTurns } = useNextPlayer();
@@ -55,7 +52,7 @@ export const Game: React.FC = () => {
             {" "}
             <h1>
                {winner
-                  ? `Winner: ${winner} !`
+                  ? `Winner: ${winner === "X" ? emojis[0] : emojis[1]} !`
                   : `Current Player:  ${xIsNext ? emojis[0] : emojis[1]}`}
             </h1>
             <Board squares={squares} emojis={emojis} fillSquare={fillSquare} />

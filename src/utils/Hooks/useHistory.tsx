@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BoardHistory } from "../../components/GameHistory/GameHistory";
-import { Player } from "../../Game";
+import { Player } from "../Types&Enums";
 
 interface useHistoryParams {
    initialBoard?: (Player | null)[];

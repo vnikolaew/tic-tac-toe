@@ -1,6 +1,6 @@
-import { Emojis } from "../../utils/Emojis";
+import { Emojis } from "../../utils/Types&Enums";
 import React, { useRef } from "react";
-import { TSquare } from "../../Game";
+import { TSquare } from "../../utils/Types&Enums";
 import "./SelectMenu.css";
 
 interface IProps {
@@ -17,7 +17,7 @@ export const SelectMenu: React.FC<IProps> = ({
    const selectRef = useRef<HTMLSelectElement>(null);
 
    return (
-      <div>
+      <div className="menu">
          {" "}
          <h1> Player {player}: </h1>
          <select

@@ -32,3 +32,17 @@
 .history button:hover {
    background-color: rgb(196, 196, 196);
 }
+
+#time-travel {
+   width: 180px;
+   padding-inline: 0.5rem;
+   padding-block: 0.3rem;
+   outline: none;
+}
+
+.option {
+   text-align: center;
+   border-radius: 1rem;
+   color: rgb(9, 20, 41);
+   font-weight: 500;
+}
