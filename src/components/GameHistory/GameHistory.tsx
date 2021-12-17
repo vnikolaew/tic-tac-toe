@@ -1,4 +1,3 @@
-import React from "react";
 import { FC } from "react";
 import { Player } from "../../Game";
 import "./History.css";
@@ -13,9 +12,10 @@ interface GameHistoryProps {
 }
 
 export const GameHistory: FC<GameHistoryProps> = ({ history, onClick }) => {
+   const isAtBeginning = history.length === 1;
    return (
       <div className="history">
-         {history.length === 1 ? (
+         {isAtBeginning ? (
             <h2>Click for some fun! </h2>
          ) : (
             <>
@@ -23,10 +23,10 @@ export const GameHistory: FC<GameHistoryProps> = ({ history, onClick }) => {
                   {" "}
                   Go back to the beginning!
                </button>
-               {history.slice(1, -1).map((turn, i) => (
+               {history.slice(1, -1).map(({ squares }, i) => (
                   <div key={i} className="turn">
                      <h2>Player: {i % 2 === 1 ? "X" : "O"}</h2>
-                     <div>State: {turn.squares.join(", ")}</div>
+                     <div>State: {squares.join(", ")}</div>
                      <button onClick={() => onClick(i + 1)}>
                         Go back to turn #{i + 1}
                      </button>

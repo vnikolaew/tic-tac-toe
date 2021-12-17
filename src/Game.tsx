@@ -2,7 +2,7 @@ import React from "react";
 
 import { Board } from "./components/Board/Board";
 import { GameHistory } from "./components/GameHistory/GameHistory";
-import { EmojiDropdown } from "./components/Dropdown/EmojiDropdown";
+import { EmojiSelectionContainer } from "./components/Dropdowns/EmojiDropdown";
 
 import { useNextPlayer } from "./utils/Hooks/useNextPlayer";
 import { useSelectEmojis } from "./utils/Hooks/useSelectEmojis";
@@ -46,7 +46,7 @@ export const Game: React.FC = () => {
 
    return (
       <>
-         <EmojiDropdown
+         <EmojiSelectionContainer
             emojis={emojis}
             setPlayerOneEmoji={setPlayerOneEmoji}
             setPlayerTwoEmoji={setPlayerTwoEmoji}

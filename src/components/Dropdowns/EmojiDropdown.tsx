@@ -3,27 +3,28 @@ import { TSquare } from "../../Game";
 import { SelectMenu } from "./SelectMenu";
 import "./SelectMenu.css";
 
-interface EDropdownProps {
+interface ESelectionContainerProps {
    emojis: [TSquare, TSquare];
    setPlayerOneEmoji: (emoji: TSquare) => void;
    setPlayerTwoEmoji: (emoji: TSquare) => void;
 }
 
-export const EmojiDropdown: React.FC<EDropdownProps> = ({
+export const EmojiSelectionContainer: React.FC<ESelectionContainerProps> = ({
    emojis,
    setPlayerOneEmoji,
    setPlayerTwoEmoji,
 }) => {
+   const [playerTwoDisabled, playerOneDisabled] = emojis;
    return (
       <div className="select">
          <SelectMenu
             player={1}
-            disabled={emojis[1]}
+            disabled={playerOneDisabled}
             setPlayerEmoji={setPlayerOneEmoji}
          />
          <SelectMenu
             player={2}
-            disabled={emojis[0]}
+            disabled={playerTwoDisabled}
             setPlayerEmoji={setPlayerTwoEmoji}
          />
       </div>
