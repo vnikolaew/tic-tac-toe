@@ -5,9 +5,7 @@ import Game from "./Game";
 
 ReactDOM.render(
    <React.StrictMode>
-      <div className="App">
-         <Game />
-      </div>
+      <Game />
    </React.StrictMode>,
    document.getElementById("root")
 );

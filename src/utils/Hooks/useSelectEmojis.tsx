@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import { TSquare } from "../../utils/Types&Enums";
 
-interface useSelectEmojiProps {
-   initialEmojis?: [TSquare, TSquare];
+type Tuple<T> = [T, T];
+
+interface useTuplesProps<T> {
+   initialValues: [T, T];
 }
 
-export const useSelectEmojis = ({
-   initialEmojis = ["X", "O"],
-}: useSelectEmojiProps = {}) => {
-   const [emojis, setEmojis] = useState<[TSquare, TSquare]>(initialEmojis);
+export function useTuples<T>({ initialValues }: useTuplesProps<T>) {
+   const [values, setValues] = useState<Tuple<T>>(initialValues);
 
-   const setPlayerOneEmoji = (emoji: TSquare) => {
-      return setEmojis(([prevEmoji, _]) => {
-         return [emoji, emojis[1]];
+   const setFirstValue = (value: T) => {
+      return setValues(([prevEmoji, _]) => {
+         return [value, values[1]];
       });
    };
 
-   const setPlayerTwoEmoji = (emoji: TSquare) => {
-      return setEmojis(([_, prevEmoji]) => {
-         return [emojis[0], emoji];
+   const setSecondValue = (value: T) => {
+      return setValues(([_, prevEmoji]) => {
+         return [values[0], value];
       });
    };
 
-   return { emojis, setPlayerOneEmoji, setPlayerTwoEmoji };
-};
+   return { values, setFirstValue, setSecondValue };
+}

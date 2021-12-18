@@ -16,7 +16,9 @@ export const GameHistory: FC<GameHistoryProps> = ({ history, onClick }) => {
    return (
       <div className="history">
          {isAtBeginning ? (
-            <h2>Click for some fun! 😮</h2>
+            <h2>
+               Click for some fun! <br /> 😮
+            </h2>
          ) : (
             <>
                <h1>

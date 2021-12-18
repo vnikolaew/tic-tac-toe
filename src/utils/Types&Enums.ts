@@ -8,11 +8,4 @@ export enum Emoji {
 export type Player = "X" | "O";
 export type TSquare = Player | Emoji | null;
 
-export const Emojis: (Emoji | Player)[] = [
-   "O",
-   "X",
-   Emoji.FIRE,
-   Emoji.ROCKET,
-   Emoji.GIFT,
-   Emoji.SANTA,
-];
+export const Emojis: (Emoji | Player)[] = ["O", "X", ...Object.values(Emoji)];

@@ -1,15 +1,13 @@
 import React from "react";
-
 import { Board } from "./components/Board/Board";
-import { GameHistory } from "./components/GameHistory/GameHistory";
 import { EmojiSelectionContainer } from "./components/Dropdowns/EmojiDropdown";
-
-import { useNextPlayer } from "./utils/Hooks/useNextPlayer";
-import { useSelectEmojis } from "./utils/Hooks/useSelectEmojis";
-import { useWinner } from "./utils/Hooks/useWinner";
-import { Player } from "./utils/Types&Enums";
-import { useHistory } from "./utils/Hooks/useHistory";
+import { GameHistory } from "./components/GameHistory/GameHistory";
 import { ResetGameButton } from "./components/GameHistory/ResetGameButton";
+import { useHistory } from "./utils/Hooks/useHistory";
+import { useNextPlayer } from "./utils/Hooks/useNextPlayer";
+import { useTuples } from "./utils/Hooks/useSelectEmojis";
+import { useWinner } from "./utils/Hooks/useWinner";
+import { Player, TSquare } from "./utils/Types&Enums";
 import "./styles/Game.css";
 
 export const Game: React.FC = () => {
@@ -19,7 +17,11 @@ export const Game: React.FC = () => {
 
    const squares = history[history.length - 1].squares;
 
-   const { emojis, setPlayerOneEmoji, setPlayerTwoEmoji } = useSelectEmojis();
+   const {
+      values: [emojiOne, emojiTwo],
+      setFirstValue: setPlayerOneEmoji,
+      setSecondValue: setPlayerTwoEmoji,
+   } = useTuples<TSquare>({ initialValues: ["X", "O"] });
 
    const goBackTo = (turn: number) => {
       setIsNext(turn % 2 === 0);
@@ -42,9 +44,9 @@ export const Game: React.FC = () => {
    };
 
    return (
-      <>
+      <div className="App">
          <EmojiSelectionContainer
-            emojis={emojis}
+            emojis={[emojiOne, emojiTwo]}
             setPlayerOneEmoji={setPlayerOneEmoji}
             setPlayerTwoEmoji={setPlayerTwoEmoji}
          />
@@ -52,16 +54,22 @@ export const Game: React.FC = () => {
             {" "}
             <h1>
                {winner
-                  ? `Winner: ${winner === "X" ? emojis[0] : emojis[1]} !`
-                  : `Current Player:  ${xIsNext ? emojis[0] : emojis[1]}`}
+                  ? `Winner: ${winner === "X" ? emojiOne : emojiTwo} !`
+                  : `Current Player:  ${xIsNext ? emojiOne : emojiTwo}`}
             </h1>
-            <Board squares={squares} emojis={emojis} fillSquare={fillSquare} />
-            <ResetGameButton history={history} jumpTo={goBackTo}>
-               {winner ? "Play again!" : "Reset"}
-            </ResetGameButton>
+            <Board
+               squares={squares}
+               emojis={[emojiOne, emojiTwo]}
+               fillSquare={fillSquare}
+            />
+            {history.length !== 1 && (
+               <ResetGameButton history={history} jumpTo={goBackTo}>
+                  {winner ? "Play again!" : "Reset"}
+               </ResetGameButton>
+            )}
          </div>
          <GameHistory history={history} onClick={goBackTo} />
-      </>
+      </div>
    );
 };
 
