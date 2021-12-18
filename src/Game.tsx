@@ -5,7 +5,7 @@ import { GameHistory } from "./components/GameHistory/GameHistory";
 import { ResetGameButton } from "./components/GameHistory/ResetGameButton";
 import { useHistory } from "./utils/Hooks/useHistory";
 import { useNextPlayer } from "./utils/Hooks/useNextPlayer";
-import { useTuples } from "./utils/Hooks/useSelectEmojis";
+import { useTuples } from "./utils/Hooks/useTuples";
 import { useWinner } from "./utils/Hooks/useWinner";
 import { Player, TSquare } from "./utils/Types&Enums";
 import "./styles/Game.css";
