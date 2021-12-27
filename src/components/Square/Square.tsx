@@ -5,15 +5,15 @@ import "./Square.css";
 interface SquareProps {
    size?: number;
    value: TSquare;
-   onClick: React.MouseEventHandler<HTMLElement>;
+   handleClick: React.MouseEventHandler<HTMLElement>;
 }
 
 export const Square: React.FC<SquareProps> = ({
    size = 150,
    value,
-   onClick,
+   handleClick,
 }) => {
-   const [squareStyle, setSquareStyle] = useState<CSSProperties | null>(null);
+   const [style, setStyle] = useState<CSSProperties | null>(null);
    return (
       <div
          className="square"
@@ -21,12 +21,12 @@ export const Square: React.FC<SquareProps> = ({
             width: `${size}px`,
             height: `${size}px`,
             cursor: value ? "" : "pointer",
-            color: squareStyle?.color,
-            backgroundColor: squareStyle?.backgroundColor,
+            color: style?.color,
+            backgroundColor: style?.backgroundColor,
          }}
-         onClick={onClick}
+         onClick={handleClick}
          onMouseEnter={() => {
-            setSquareStyle(() => {
+            setStyle(() => {
                return value
                   ? null
                   : {
@@ -36,7 +36,7 @@ export const Square: React.FC<SquareProps> = ({
             });
          }}
          onMouseLeave={() => {
-            setSquareStyle(null);
+            setStyle(null);
          }}
       >
          {value}

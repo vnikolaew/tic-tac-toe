@@ -1,24 +1,18 @@
 import React, { ReactNode } from "react";
 import { BoardHistory } from "./GameHistory";
 
-interface JumpBackButtonProps {
-   history: BoardHistory[];
+interface PlayAgainBtnProps {
    jumpTo: (turn: number) => void;
    children: ReactNode;
 }
 
-export const ResetGameButton = ({
-   history,
-   jumpTo,
-   children,
-}: JumpBackButtonProps) => {
+export const PlayAgainButton = ({ jumpTo, children }: PlayAgainBtnProps) => {
    return (
       <button
          style={{
-            cursor: history.length > 1 ? "pointer" : "",
+            cursor: "pointer",
          }}
          className="reset"
-         disabled={history.length === 1}
          onClick={() => {
             jumpTo(0);
          }}

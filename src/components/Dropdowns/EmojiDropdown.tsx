@@ -1,20 +1,20 @@
 import React from "react";
+import { Tuple } from "../../utils/Hooks/useTuples";
 import { TSquare } from "../../utils/Types&Enums";
 import { SelectMenu } from "./SelectMenu";
 import "./SelectMenu.css";
 
-interface ESelectionContainerProps {
-   emojis: [TSquare, TSquare];
-   setPlayerOneEmoji: (emoji: TSquare) => void;
-   setPlayerTwoEmoji: (emoji: TSquare) => void;
+interface IProps {
+   emojis: Tuple<TSquare>;
+   setPlayerEmojis: Tuple<(emoji: TSquare) => void>;
 }
 
-export const EmojiSelectionContainer: React.FC<ESelectionContainerProps> = ({
+export const EmojiSelectionContainer: React.FC<IProps> = ({
    emojis,
-   setPlayerOneEmoji,
-   setPlayerTwoEmoji,
+   setPlayerEmojis,
 }) => {
    const [playerTwoDisabled, playerOneDisabled] = emojis;
+   const [setPlayerOneEmoji, setPlayerTwoEmoji] = setPlayerEmojis;
    return (
       <div className="select">
          <h1>Select your emojis: </h1>

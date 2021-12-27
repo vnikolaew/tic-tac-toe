@@ -18,10 +18,10 @@ export const Board: React.FC<BoardProps> = ({
       <div className="board">
          {squares.map((value, i) => (
             <Square
-               size={130}
                key={i}
+               size={130}
                value={value && (value === "X" ? emojis[0] : emojis[1])}
-               onClick={(_) => fillSquare(i)}
+               handleClick={() => fillSquare(i)}
             />
          ))}
       </div>

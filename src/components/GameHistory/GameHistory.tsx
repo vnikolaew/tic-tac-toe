@@ -33,12 +33,12 @@ export const GameHistory: FC<GameHistoryProps> = ({ history, onClick }) => {
                      onClick(+e.target.value);
                   }}
                >
-                  <option value="Go back to: " disabled={true}>
+                  <option value="Go back to: " disabled>
                      Go back to:{" "}
                   </option>
-                  {history.slice(0, -1).map(({ squares }, i) => (
+                  {history.slice(0, -1).map((_, i) => (
                      <option value={i} key={i} className="option">
-                        {`Turn #${i + 1}`}
+                        Turn #{i + 1}
                      </option>
                   ))}
                </select>

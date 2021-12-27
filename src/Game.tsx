@@ -1,16 +1,18 @@
-import React from "react";
+import { FC } from "react";
 import { Board } from "./components/Board/Board";
 import { EmojiSelectionContainer } from "./components/Dropdowns/EmojiDropdown";
 import { GameHistory } from "./components/GameHistory/GameHistory";
-import { ResetGameButton } from "./components/GameHistory/ResetGameButton";
-import { useHistory } from "./utils/Hooks/useHistory";
-import { useNextPlayer } from "./utils/Hooks/useNextPlayer";
-import { useTuples } from "./utils/Hooks/useTuples";
-import { useWinner } from "./utils/Hooks/useWinner";
+import { PlayAgainButton } from "./components/GameHistory/PlayAgainButton";
+import {
+   useHistory,
+   useNextPlayer,
+   useTuples,
+   useWinner,
+} from "./utils/Hooks/index";
 import { Player, TSquare } from "./utils/Types&Enums";
 import "./styles/Game.css";
 
-export const Game: React.FC = () => {
+export const Game: FC = () => {
    const { xIsNext, setIsNext, switchTurns } = useNextPlayer();
    const { winner, setWinner, checkWinner } = useWinner<Player | null>();
    const { history, pushMoveToHistory, setHistory } = useHistory();
@@ -21,7 +23,7 @@ export const Game: React.FC = () => {
       values: [emojiOne, emojiTwo],
       setFirstValue: setPlayerOneEmoji,
       setSecondValue: setPlayerTwoEmoji,
-   } = useTuples<TSquare>({ initialValues: ["X", "O"] });
+   } = useTuples<TSquare>(["X", "O"]);
 
    const goBackTo = (turn: number) => {
       setIsNext(turn % 2 === 0);
@@ -47,8 +49,7 @@ export const Game: React.FC = () => {
       <div className="App">
          <EmojiSelectionContainer
             emojis={[emojiOne, emojiTwo]}
-            setPlayerOneEmoji={setPlayerOneEmoji}
-            setPlayerTwoEmoji={setPlayerTwoEmoji}
+            setPlayerEmojis={[setPlayerOneEmoji, setPlayerTwoEmoji]}
          />
          <div className="Game">
             {" "}
@@ -62,10 +63,10 @@ export const Game: React.FC = () => {
                emojis={[emojiOne, emojiTwo]}
                fillSquare={fillSquare}
             />
-            {history.length !== 1 && (
-               <ResetGameButton history={history} jumpTo={goBackTo}>
-                  {winner ? "Play again!" : "Reset"}
-               </ResetGameButton>
+            {winner && (
+               <PlayAgainButton jumpTo={goBackTo}>
+                  {"Play again!"}
+               </PlayAgainButton>
             )}
          </div>
          <GameHistory history={history} onClick={goBackTo} />
